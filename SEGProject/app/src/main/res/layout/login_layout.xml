@@ -97,6 +97,7 @@
         android:translationY="100dp" />
 
     <Button
+        android:id="@+id/backButton"
         android:layout_width="102dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_rounded"
