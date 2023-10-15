@@ -29,7 +29,7 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 
-        username = findViewById(R.id.username);//nothing for these two yet as code needs to be written
+        username = findViewById(R.id.email);//nothing for these two yet as code needs to be written
         password = findViewById(R.id.password);
 
         backButton = findViewById(R.id.backButton);
