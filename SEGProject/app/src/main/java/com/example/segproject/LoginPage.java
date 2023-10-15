@@ -22,7 +22,7 @@ public class LoginPage extends AppCompatActivity {
 
     TextView email, titlePage;
     EditText username, password;
-    Button loginButton, backButton;
+    private Button loginButton, backButton;
     //this part made by Bill Wu 300170086
     @Override
     protected void onCreate(Bundle savedInstanceState) {
