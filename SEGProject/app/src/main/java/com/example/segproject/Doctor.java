@@ -6,13 +6,13 @@ public class Doctor extends User{
     //instance variables
     protected int employeeNumber;
 
-    protected ArrayList specialty;
+    protected ArrayList<String> specialties;
 
     //constructor
-    public Doctor(){
-        super(int userId, String username, String password, String firstName, String lastName, String phoneNumber, Address address);
+    public Doctor(int userId, String username, String password, String firstName, String lastName, String phoneNumber, String address, int employeeNumber, ArrayList<String> specialties){
+        super(userId, username, password, firstName, lastName, phoneNumber, address, "Doctor");
         this.employeeNumber = employeeNumber;
-        this.specialty = specialty;
+        this.specialties = specialties;
     }
 
 

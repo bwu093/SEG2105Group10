@@ -4,11 +4,11 @@ import java.util.ArrayList;
 public class Patient extends User{
 
     //instance variables
-    protected int healthCardNumber;
+    protected String healthCardNumber;
 
     //constructor
-    public Patient(){
-        super(int userId, String username, String password, String firstName, String lastName, String phoneNumber, Address address);
+    public Patient(int userId, String username, String password, String firstName, String lastName, String phoneNumber, String address, String healthCardNumber){
+        super(userId, username, password, firstName, lastName, phoneNumber, address, "Patient");
         this.healthCardNumber = healthCardNumber;
     }
 
