@@ -1,3 +1,5 @@
+package com.example.segproject;
+
 import java.util.ArrayList;
 
 //this class represents the Patient which extends user
