@@ -40,7 +40,7 @@ public class RegistrationPageForPatient extends AppCompatActivity {
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if (!validateFirstName() || !validateLastName() || !validateUsername() || !validatePassword() || !validatePhoneNumber() || !validateAddress() || !validateHealthCardNumber(){
+                if (!validateFirstName() || !validateLastName() || !validateUsername() || !validatePassword() || !validatePhoneNumber() || !validateAddress() || !validateHealthCardNumber()){
                 } else {
                     registerPatient();
                 }

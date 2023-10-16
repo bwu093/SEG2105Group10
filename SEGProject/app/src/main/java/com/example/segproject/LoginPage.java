@@ -24,6 +24,13 @@ public class LoginPage extends AppCompatActivity {
     EditText username, password;
     private Button loginButton, backButton;
     //this part made by Bill Wu 300170086
+
+    //This is only temp change the users, passwords and roles with the actual info later
+    private final String[] users = {"doctorOne", "patientOne"};
+    private final String[] passwords = {"doctorOnePass", "patientOnePass"};
+    private final String[] roles = {"doctor", "patient"};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,7 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
+        loginButton = findViewById(R.id.approve_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,35 +63,55 @@ public class LoginPage extends AppCompatActivity {
     //this part is work in progress really first if statement makes it so that it will prompt the user to input something
     //sees if the user is real or not
     public Boolean validateUsername() {
-        String val = username.getText().toString();
+        String val = username.getText().toString().trim();
         if (val.isEmpty()) {
             username.setError("Username cannot be empty");
             return false;
-        } else {
-            username.setError(null);
-            return true;
         }
+        return true;
+
     }
-    public Boolean validatePassword(){
-        String val = password.getText().toString();
+
+    public Boolean validatePassword() {
+        String val = password.getText().toString().trim();
         if (val.isEmpty()) {
             password.setError("Password cannot be empty");
             return false;
-        } else {
-            password.setError(null);
-            return true;
         }
+
+        return true;
+
     }
 
     //returns to homepage
-    public void openWelcome(){
+    public void openWelcome() {
         Intent intentLogin = new Intent(this, WelcomePage.class);
         startActivity(intentLogin);
     }
 
     //This part checks if they are a doctor or patient, add in code below, might need two classes for the occupations
-    public void checkUsers(){
+    public void checkUsers() {
+        String userUsername = username.getText().toString().trim();
+        String userPassword = password.getText().toString().trim();
+
+        for (int i = 0; i < users.length; i++) {
+            if (userUsername.equals(users[i]) && userPassword.equals(passwords[i])) {
+                // Authentication successful. You can set user roles and navigate accordingly.
+                String role = roles[i];
+                if ("doctor".equals(role)) {
+                    //User is a doctor
+                    Intent intent = new Intent(this, Doctor.class);
+                    startActivity(intent);
+                } else if ("patient".equals(role)) {
+                    //User is a patient
+                    Intent intent = new Intent(this, Patient.class);
+                    startActivity(intent);
+                }
+                return;
+            }
+        }
+
+        Toast.makeText(this, "Authentication failed. Check credentials.", Toast.LENGTH_SHORT).show();
 
     }
-
 }
