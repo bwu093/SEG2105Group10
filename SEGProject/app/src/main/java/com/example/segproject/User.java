@@ -34,7 +34,7 @@ public class User{
         if(this.username.equals(username) && this.password.equals(password)){
             System.out.println("Welcome! You are logged in as " + role);
         }
-        else() {
+        else {
             System.out.println("wrong username or password");
         }
     }
