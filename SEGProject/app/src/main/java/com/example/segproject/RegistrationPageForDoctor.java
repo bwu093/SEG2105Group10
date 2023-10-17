@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class RegistrationPageForDoctor extends AppCompatActivity {
     EditText firstName, lastName, username, password, phoneNumber, address, employeeNumber, specialties;
-    private Button registerButton, backButton;
+    private Button registerButtonForDoctor, backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class RegistrationPageForDoctor extends AppCompatActivity {
         address = findViewById(R.id.address);
         employeeNumber = findViewById(R.id.employeeNumber);
         specialties = findViewById(R.id.specialties);
-        registerButton = findViewById(R.id.registerButton);
+        registerButtonForDoctor = findViewById(R.id.registerButtonForDoctor);
         backButton = findViewById(R.id.backButton);
 
         backButton.setOnClickListener(new View.OnClickListener() {
