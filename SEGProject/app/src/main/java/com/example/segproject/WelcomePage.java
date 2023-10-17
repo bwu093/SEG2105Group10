@@ -51,7 +51,7 @@ public class WelcomePage extends AppCompatActivity {
     }
 
     public void openRegisterPage(){
-        Intent intentRegister = new Intent(this, LoginPage.class);
+        Intent intentRegister = new Intent(this, RegistrationPage.class);
         startActivity(intentRegister);
     }
 }
