@@ -86,7 +86,7 @@
 
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/registerButtonForDoctor"
         android:layout_width="185dp"
         android:layout_height="55dp"
         android:text="Register"
