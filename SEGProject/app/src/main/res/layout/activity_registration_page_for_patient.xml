@@ -94,7 +94,7 @@
         tools:layout_editor_absoluteY="307dp" />
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/registerButtonForPatient"
         android:layout_width="185dp"
         android:layout_height="55dp"
         android:text="Register"
