@@ -28,7 +28,7 @@ public class RegistrationPageForPatient extends AppCompatActivity {
         phoneNumber = findViewById(R.id.phoneNumber);
         address = findViewById(R.id.address);
         healthCardNumber = findViewById(R.id.healthCardNumber);
-        registerButton = findViewById(R.id.registerButtonForPatient);
+        registerButtonForPatient = findViewById(R.id.registerButtonForPatient);
         backButton = findViewById(R.id.backButton);
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +38,7 @@ public class RegistrationPageForPatient extends AppCompatActivity {
             }
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        registerButtonForPatient.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (!validateFirstName() || !validateLastName() || !validateUsername() || !validatePassword() || !validatePhoneNumber() || !validateAddress() || !validateHealthCardNumber()){
                 } else {
