@@ -9,14 +9,11 @@ public class Patient extends User{
     protected String healthCardNumber;
 
     //constructor
-    public Patient(int userId, String username, String password, String firstName, String lastName, String phoneNumber, String address, String healthCardNumber){
+    public Patient(int userId, String username, String password, String firstName, String lastName, String phoneNumber, String address, String healthCardNumber) {
         super(userId, username, password, firstName, lastName, phoneNumber, address, "Patient");
         this.healthCardNumber = healthCardNumber;
     }
 
-
     //methods
-
-
 
 }

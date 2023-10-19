@@ -13,15 +13,17 @@
         android:theme="@style/Theme.SEGProject"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".WelcomePage"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.SEGProject">
+            android:theme="@style/Theme.AppCompat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".LoginPage"
+            android:theme="@style/Theme.AppCompat">
         </activity>
     </application>
 
