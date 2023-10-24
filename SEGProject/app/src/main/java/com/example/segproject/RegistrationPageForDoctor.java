@@ -42,7 +42,7 @@ public class RegistrationPageForDoctor extends AppCompatActivity {
             }
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        registerButtonForDoctor.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (!validateFirstName() || !validateLastName() || !validateUsername() || !validatePassword() || !validatePhoneNumber() || !validateAddress() || !validateEmployeeNumber() || !validateSpecialties()){
             } else {
