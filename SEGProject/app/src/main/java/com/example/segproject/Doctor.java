@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class Doctor extends User{
 
     //instance variables
-    protected int employeeNumber;
+    protected String employeeNumber;
 
-    protected ArrayList<String> specialties;
+    protected String specialties;
 
     //constructor
-    public Doctor(int userId, String username, String password, String firstName, String lastName, String phoneNumber, String address, int employeeNumber, ArrayList<String> specialties){
+    public Doctor(String userId, String username, String password, String firstName, String lastName, String phoneNumber, String address, String employeeNumber, String specialties){
         super(userId, username, password, firstName, lastName, phoneNumber, address, "Doctor");
         this.employeeNumber = employeeNumber;
         this.specialties = specialties;
