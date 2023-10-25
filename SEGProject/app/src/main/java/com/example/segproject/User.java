@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class User{
 
     //instance variables
-    protected int userID;
+    protected String userID;
     protected String username; //a user's username is their email
     protected String password;
     protected String firstName;
@@ -18,7 +18,7 @@ public class User{
 
 
     //constructor
-    public User(int userId, String username, String password, String firstName, String lastName, String phoneNumber, String address, String role){
+    public User(String userId, String username, String password, String firstName, String lastName, String phoneNumber, String address, String role){
         this.userID = userId;
         this.username = username;
         this.password = password;;

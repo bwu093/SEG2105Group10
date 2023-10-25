@@ -14,13 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import java.util.Objects;
 
 import org.w3c.dom.Text;
 
@@ -32,11 +32,6 @@ public class LoginPage extends AppCompatActivity {
     EditText username, password;
     private Button loginButton, backButton;
     //this part made by Bill Wu 300170086
-
-    //This is only temp change the users, passwords and roles with the actual info later
-    private final String[] users = {"doctorOne", "patientOne"};
-    private final String[] passwords = {"doctorOnePass", "patientOnePass"};
-    private final String[] roles = {"doctor", "patient"};
 
 
     @Override

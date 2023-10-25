@@ -1,5 +1,6 @@
 package com.example.segproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,17 +11,33 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegistrationPageForPatient extends AppCompatActivity {
     EditText firstName, lastName, username, password, phoneNumber, address, healthCardNumber;
     private Button registerButtonForPatient, backButton;
+    TextView viewSuccessInfo;
+    LinearLayout layoutError;
+
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page_for_patient);
+
+
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("users");
+
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         username = findViewById(R.id.username);
@@ -38,93 +55,84 @@ public class RegistrationPageForPatient extends AppCompatActivity {
             }
         });
 
+
+
         registerButtonForPatient.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if (!validateFirstName() || !validateLastName() || !validateUsername() || !validatePassword() || !validatePhoneNumber() || !validateAddress() || !validateHealthCardNumber()){
-                } else {
-                    registerPatient();
+                String validateFirstName = firstName.getText().toString().trim();
+                if (validateFirstName.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing name");
+                    return;
+                }
+                String validateLastName = lastName.getText().toString().trim();
+                if (validateLastName.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing name");
+                    return;
+
                 }
 
+                String validateUsername = username.getText().toString().trim().toLowerCase();
+                if(validateUsername.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing email");
+                    return;
+                }
+
+                reference.child(validateUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            layoutError.setVisibility(View.VISIBLE);
+                            viewSuccessInfo.setText("Email already taken");
+                        } else{
+                            layoutError.setVisibility(View.GONE);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        layoutError.setVisibility(View.VISIBLE);
+                        viewSuccessInfo.setText("Error checking email");
+                    }
+                });
+
+                String validatePassword = password.getText().toString().trim();
+                if(validatePassword.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing password");
+                    return;
+                }
+
+                String validatePhoneNumber = phoneNumber.getText().toString().trim();
+                if(validatePhoneNumber.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing phone number");
+                    return;
+                }
+
+                String validateAddress = address.getText().toString().trim();
+                if(validateAddress.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing address");
+                    return;
+                }
+
+                String validateHealthcard = healthCardNumber.getText().toString().trim();
+                if(validateHealthcard.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing health card info");
+                    return;
+                }
+
+
+                User newPatient = new Patient(validateHealthcard, validateUsername, validatePassword, validateFirstName, validateLastName, validatePhoneNumber, validateAddress, validateHealthcard);
+                DatabaseReference doctorRef = database.getReference("doctors").child(String.valueOf(healthCardNumber));
+                doctorRef.setValue(newPatient);
             }
         });
     }
-    // Validating Different Characteristics of Patient
-    public boolean validateFirstName() {
-        String val = firstName.getText().toString();
-        if (val.isEmpty()) {
-            firstName.setError("First name must not be empty");
-            return false;
-        } else {
-            firstName.setError(null);
-            return true;
-        }
-    }
 
-    public boolean validateLastName() {
-        String val = lastName.getText().toString();
-        if (val.isEmpty()) {
-            lastName.setError("Last name must not be empty");
-            return false;
-        } else {
-            lastName.setError(null);
-            return true;
-        }
-    }
-
-    public boolean validateUsername() {
-        String val = username.getText().toString();
-        if (val.isEmpty()) {
-            username.setError("Username must not be empty");
-            return false;
-        } else {
-            username.setError(null);
-            return true;
-        }
-    }
-
-    public boolean validatePassword() {
-        String val = password.getText().toString();
-        if (val.isEmpty()) {
-            password.setError("Password must not be empty");
-            return false;
-        } else {
-            password.setError(null);
-            return true;
-        }
-    }
-
-    public boolean validateAddress() {
-        String val = address.getText().toString();
-        if (val.isEmpty()) {
-            address.setError("Address must not be empty");
-            return false;
-        } else {
-            address.setError(null);
-            return true;
-        }
-    }
-
-    public boolean validatePhoneNumber() {
-        String val = phoneNumber.getText().toString();
-        if (val.isEmpty()) {
-            phoneNumber.setError("Phone number must not be empty");
-            return false;
-        } else {
-            phoneNumber.setError(null);
-            return true;
-        }
-    }
-
-    public boolean validateHealthCardNumber() {
-        String val = healthCardNumber.getText().toString();
-        if (val.isEmpty()) {
-            healthCardNumber.setError("Health card number must not be empty");
-            return false;
-        } else {
-            healthCardNumber.setError(null);
-            return true;
-        }
-    }
     // RegistrationPage switches into loginPage
     public void registerPatient() {
         Intent intent = new Intent(this, LoginPage.class );
@@ -132,7 +140,10 @@ public class RegistrationPageForPatient extends AppCompatActivity {
     }
     // returns to homepage from RegistrationPage
     public void openWelcome() {
-        Intent intentLogin = new Intent(this, WelcomePage.class);
+        Intent intentLogin = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            intentLogin = new Intent(this, WelcomePage.class);
+        }
         startActivity(intentLogin);
     }
 }
