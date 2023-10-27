@@ -23,6 +23,7 @@ public class RegistrationPage extends AppCompatActivity{
 
         registerButtonForPatient = findViewById(R.id.registerButtonForPatient);
         registerButtonForPatient.setOnClickListener(new View.OnClickListener(){
+            @Override
             public void onClick(View view){
                 openRegistrationPageForPatient();
             }
@@ -31,16 +32,17 @@ public class RegistrationPage extends AppCompatActivity{
 
         registerButtonForDoctor = findViewById(R.id.registerButtonForDoctor);
         registerButtonForDoctor.setOnClickListener(new View.OnClickListener(){
-        public void onClick(View view){
+            @Override
+            public void onClick(View view){
           openRegistrationPageForDoctor();
     }
-    });
+        });
       
-        }
+    }
         // goes to registration page for patient
         public void openRegistrationPageForPatient(){
-    Intent intentRegistrationForPatient = new Intent(this, RegistrationPageForPatient.class);
-    startActivity(intentRegistrationForPatient);
+            Intent intentRegistrationForPatient = new Intent(this, RegistrationPageForPatient.class);
+            startActivity(intentRegistrationForPatient);
         }
         // goes to registration page for doctor
 
