@@ -169,10 +169,27 @@ public class RegistrationPageForDoctor extends AppCompatActivity {
                 DatabaseReference doctorRef = database.getReference("doctors").child(String.valueOf(employeeNumber));
                 doctorRef.setValue(newDoctor);
 
+
         }
     });
 
 }
+
+// Directs to one of the layout pages such as the Welcome page, the Rejected page, and the Pending page as dictated by admin.
+    public void adminExaminesTheRegistration(String employeeNumber,  String registerCondition) {
+        DatabaseReference doctorRef = database.getReference("doctors").child(String.valueOf(employeeNumber));
+        if ("ApprovalByAdmin".equals(registerCondition)) {
+            doctorRef.setValue("ApprovedByAdmin");
+            openWelcome();}
+        else if ("RejectionByAdmin".equals(registerCondition)) {
+            doctorRef.setValue("RejectedByAdmin");
+            openRejectedPage();}
+        else if ("PendingForAdmin".equals(registerCondition)) {
+            doctorRef.setValue("Pending");
+            openPendingPage();}
+    }
+
+
 
     // RegistrationPage switches into loginPage
     public void registerDoctor() {
@@ -189,6 +206,17 @@ public class RegistrationPageForDoctor extends AppCompatActivity {
             intentLogin = new Intent(this, WelcomePage.class);
         }
         startActivity(intentLogin);
+    }
+
+    // Goes into Registration Pending layout
+    public void openPendingPage() {
+        setContentView(R.layout.registration_pending_by_administrator);
+    }
+
+    // Goes into Registration Rejected layout
+
+    public void openRejectedPage() {
+        setContentView(R.layout.registration_rejected_by_administrator);
     }
 
 }
