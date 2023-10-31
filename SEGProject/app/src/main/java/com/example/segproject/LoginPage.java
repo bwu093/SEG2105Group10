@@ -1,6 +1,7 @@
 package com.example.segproject;
 //Bill Wu made the basics of this page, waiting for others to fill in the rest
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,13 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import org.w3c.dom.Text;
 
 
@@ -24,11 +32,6 @@ public class LoginPage extends AppCompatActivity {
     EditText username, password;
     private Button loginButton, backButton;
     //this part made by Bill Wu 300170086
-
-    //This is only temp change the users, passwords and roles with the actual info later
-    private final String[] users = {"doctorOne", "patientOne"};
-    private final String[] passwords = {"doctorOnePass", "patientOnePass"};
-    private final String[] roles = {"doctor", "patient"};
 
 
     @Override
@@ -94,6 +97,42 @@ public class LoginPage extends AppCompatActivity {
         String userUsername = username.getText().toString().trim();
         String userPassword = password.getText().toString().trim();
 
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        Query checkUserData = reference.orderByChild("username").equalTo(userUsername);
+
+        checkUserData.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    username.setError(null);
+                    String databasePass = snapshot.child(userUsername).child("password").getValue(String.class);
+
+                    if (databasePass.equals(userPassword) ){
+                        String databaseEmail = snapshot.child(userUsername).child("email").getValue(String.class);
+                        String databaseUsername = snapshot.child(userUsername).child("username").getValue(String.class);
+                        Intent intent = new Intent(LoginPage.this, User.class);
+                        intent.putExtra("email", databaseUsername);
+                        intent.putExtra("password", databasePass);
+                        startActivity(intent);
+                    } else {
+                        password.setError("Invalid Credentials");
+                        password.requestFocus();
+                    }
+                    } else{
+                    username.setError("Username does not exist");
+                    username.requestFocus();
+                }
+                }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //Testing for something
+
+        /*
         for (int i = 0; i < users.length; i++) {
             if (userUsername.equals(users[i]) && userPassword.equals(passwords[i])) {
                 // Authentication successful. You can set user roles and navigate accordingly.
@@ -112,6 +151,7 @@ public class LoginPage extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Authentication failed. Check credentials.", Toast.LENGTH_SHORT).show();
+        */
 
     }
 }

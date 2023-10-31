@@ -1,5 +1,6 @@
 package com.example.segproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,19 +11,38 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Locale;
 
 
 public class RegistrationPageForDoctor extends AppCompatActivity {
     EditText firstName, lastName, username, password, phoneNumber, address, employeeNumber, specialties;
-    private Button registerButtonForDoctor, backButton;
+    TextView viewSuccessInfo;
+    LinearLayout layoutError;
+    private Button registerButtonForDoctor, backButton, returnDoctor;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page_for_doctor);
 
+
+
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("users");
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -35,121 +55,170 @@ public class RegistrationPageForDoctor extends AppCompatActivity {
         registerButtonForDoctor = findViewById(R.id.registerButtonForDoctor);
         backButton = findViewById(R.id.backButton);
 
+        viewSuccessInfo = findViewById(R.id.successInfo);
+        layoutError = findViewById(R.id.error_display);
+
         backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 openWelcome();
-
             }
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        returnDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                if (!validateFirstName() || !validateLastName() || !validateUsername() || !validatePassword() || !validatePhoneNumber() || !validateAddress() || !validateEmployeeNumber() || !validateSpecialties()){
-            } else {
                 registerDoctor();
             }
+        });
+
+        registerButtonForDoctor.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                String validateFirstName = firstName.getText().toString().trim();
+                if (validateFirstName.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing name");
+                    return;
+            }
+                String validateLastName = lastName.getText().toString().trim();
+                if (validateLastName.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing name");
+                    return;
+
+                }
+
+                String validateUsername = username.getText().toString().trim().toLowerCase();
+                if(validateUsername.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing email");
+                    return;
+                }
+
+                reference.child(validateUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            layoutError.setVisibility(View.VISIBLE);
+                            viewSuccessInfo.setText("Email already taken");
+                        } else{
+                            layoutError.setVisibility(View.GONE);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        layoutError.setVisibility(View.VISIBLE);
+                        viewSuccessInfo.setText("Error checking email");
+                    }
+                });
+
+                String validatePassword = password.getText().toString().trim();
+                if(validatePassword.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing password");
+                    return;
+                }
+
+
+                String validatePhoneNumber = phoneNumber.getText().toString().trim();
+                if(validatePhoneNumber.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing phone number");
+                    return;
+                }
+
+                String validateAddress = address.getText().toString().trim();
+                if(validateAddress.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing address");
+                    return;
+                }
+
+                String validateEmployeeNumber = employeeNumber.getText().toString().trim();
+                if(validateEmployeeNumber.isEmpty()){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing employee number");
+                    return;
+                }
+                reference.child(validateEmployeeNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            layoutError.setVisibility(View.VISIBLE);
+                            viewSuccessInfo.setText("Number already taken");
+                        } else{
+                            layoutError.setVisibility(View.GONE);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        layoutError.setVisibility(View.VISIBLE);
+                        viewSuccessInfo.setText("Error checking email");
+                    }
+                });
+
+                String validateSpecialties = specialties.getText().toString();
+                String[] specialtiesArray = validateSpecialties.split(",");
+                if(specialtiesArray.length == 0){
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Missing employee number");
+                    return;
+                }
+
+                User newDoctor = new Doctor(validateEmployeeNumber, validateUsername, validatePassword, validateFirstName, validateLastName, validatePhoneNumber, validateAddress, validateEmployeeNumber, validateSpecialties);
+                DatabaseReference doctorRef = database.getReference("doctors").child(String.valueOf(employeeNumber));
+                doctorRef.setValue(newDoctor);
+
 
         }
     });
-}
-// Validating Different Characteristics of Doctor
-public boolean validateFirstName() {
-    String val = firstName.getText().toString();
-    if (val.isEmpty()) {
-        firstName.setError("First name must not be empty");
-        return false;
-    } else {
-        firstName.setError(null);
-        return true;
-    }
+
 }
 
-public boolean validateLastName() {
-    String val = lastName.getText().toString();
-    if (val.isEmpty()) {
-        lastName.setError("Last name must not be empty");
-        return false;
-    } else {
-        lastName.setError(null);
-        return true;
+// Directs to one of the layout pages such as the Welcome page, the Rejected page, and the Pending page as dictated by admin.
+    public void adminExaminesTheRegistration(String employeeNumber,  String registerCondition) {
+        DatabaseReference doctorRef = database.getReference("doctors").child(String.valueOf(employeeNumber));
+        if ("ApprovalByAdmin".equals(registerCondition)) {
+            doctorRef.setValue("ApprovedByAdmin");
+            openWelcome();}
+        else if ("RejectionByAdmin".equals(registerCondition)) {
+            doctorRef.setValue("RejectedByAdmin");
+            openRejectedPage();}
+        else if ("PendingForAdmin".equals(registerCondition)) {
+            doctorRef.setValue("Pending");
+            openPendingPage();}
     }
-}
 
-public boolean validateUsername() {
-    String val = username.getText().toString();
-    if (val.isEmpty()) {
-        username.setError("Username must not be empty");
-        return false;
-    } else {
-        username.setError(null);
-        return true;
-    }
-}
 
-public boolean validatePassword() {
-    String val = password.getText().toString();
-    if (val.isEmpty()) {
-        password.setError("Password must not be empty");
-        return false;
-    } else {
-        password.setError(null);
-        return true;
-    }
-}
 
-public boolean validateAddress() {
-    String val = address.getText().toString();
-    if (val.isEmpty()) {
-        address.setError("Address must not be empty");
-        return false;
-    } else {
-        address.setError(null);
-        return true;
+    // RegistrationPage switches into loginPage
+    public void registerDoctor() {
+        Intent intent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            intent = new Intent(this, LoginPage.class );
+        }
+        startActivity(intent);
     }
-}
+    // returns to homepage from RegistrationPage
+    public void openWelcome() {
+        Intent intentLogin = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            intentLogin = new Intent(this, WelcomePage.class);
+        }
+        startActivity(intentLogin);
+    }
 
-public boolean validatePhoneNumber() {
-    String val = phoneNumber.getText().toString();
-    if (val.isEmpty()) {
-        phoneNumber.setError("Phone number must not be empty");
-        return false;
-    } else {
-        phoneNumber.setError(null);
-        return true;
+    // Goes into Registration Pending layout
+    public void openPendingPage() {
+        setContentView(R.layout.registration_pending_by_administrator);
     }
-}
 
-public boolean validateEmployeeNumber() {
-    String val = employeeNumber.getText().toString();
-    if (val.isEmpty()) {
-        employeeNumber.setError("Employee number must not be empty");
-        return false;
-    } else {
-        employeeNumber.setError(null);
-        return true;
-    }
-}
+    // Goes into Registration Rejected layout
 
-public boolean validateSpecialties() {
-    String val = specialties.getText().toString();
-    if (val.isEmpty()) {
-        specialties.setError("Specialties must not be empty");
-        return false;
-    } else {
-        specialties.setError(null);
-        return true;
+    public void openRejectedPage() {
+        setContentView(R.layout.registration_rejected_by_administrator);
     }
-}
-// RegistrationPage switches into loginPage
-public void registerDoctor() {
-    Intent intent = new Intent(this, LoginPage.class );
-    startActivity(intent);
-}
-// returns to homepage from RegistrationPage
-public void openWelcome() {
-    Intent intentLogin = new Intent(this, WelcomePage.class);
-    startActivity(intentLogin);
-}
+
 }
 
 
