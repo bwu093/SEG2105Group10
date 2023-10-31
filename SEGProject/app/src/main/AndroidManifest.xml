@@ -34,6 +34,9 @@
         <activity android:name=".RegistrationPageForPatient"
             android:theme="@style/Theme.AppCompat">
         </activity>
+        <activity android:name=".AfterLoginPage"
+            android:theme="@style/Theme.AppCompat">
+    </activity>
     </application>
 
 </manifest>
