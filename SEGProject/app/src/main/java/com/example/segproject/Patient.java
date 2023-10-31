@@ -11,7 +11,7 @@ public class Patient extends User{
     //constructor
     public Patient(String userId, String username, String password, String firstName, String lastName, String phoneNumber, String address, String healthCardNumber) {
         super(userId, username, password, firstName, lastName, phoneNumber, address, "Patient");
-        //this.healthCardNumber = healthCardNumber;
+        this.healthCardNumber = healthCardNumber;
     }
 
     public String getHealthCardNumber() {
