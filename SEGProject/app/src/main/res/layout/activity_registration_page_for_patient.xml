@@ -167,7 +167,8 @@
         android:layout_height="835dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-64dp">
+        tools:layout_editor_absoluteX="-64dp"
+        tools:ignore="MissingConstraints">
 
         <ImageView
             android:id="@+id/imageView"

@@ -80,7 +80,9 @@ public class RegistrationPageForPatient extends AppCompatActivity {
                     return;
                 }
 
-                reference.child(validateUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                String hashedEmail = hashEmail(validateUsername);
+
+                reference.child("users").child(hashedEmail).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
@@ -118,19 +120,53 @@ public class RegistrationPageForPatient extends AppCompatActivity {
                     return;
                 }
 
-                String validateHealthcard = healthCardNumber.getText().toString().trim();
-                if(validateHealthcard.isEmpty()){
+                String validateHealthCardNumber = healthCardNumber.getText().toString().trim();
+                if(validateHealthCardNumber.isEmpty()){
                     layoutError.setVisibility(View.VISIBLE);
                     viewSuccessInfo.setText("Missing health card info");
                     return;
                 }
 
+                if (validateHealthCardNumber.contains(".") || validateHealthCardNumber.contains("#") || validateHealthCardNumber.contains("$") || validateHealthCardNumber.contains("[") ||  validateHealthCardNumber.contains("]")) {
+                    layoutError.setVisibility(View.VISIBLE);
+                    viewSuccessInfo.setText("Invalid health card info");
+                    return;
+                }
 
-                User newPatient = new Patient(validateHealthcard, validateUsername, validatePassword, validateFirstName, validateLastName, validatePhoneNumber, validateAddress, validateHealthcard);
-                DatabaseReference doctorRef = database.getReference("doctors").child(String.valueOf(healthCardNumber));
-                doctorRef.setValue(newPatient);
+                String databasePath = "users/" + hashEmail(validateUsername);
+
+                DatabaseReference userRef = database.getReference(databasePath);
+
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            layoutError.setVisibility(View.VISIBLE);
+                            viewSuccessInfo.setText("Email already taken");
+                        } else {
+                            layoutError.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        layoutError.setVisibility(View.VISIBLE);
+                        viewSuccessInfo.setText("Error checking email");
+                    }
+                });
+
+                User newPatient = new Patient(validateHealthCardNumber, validateUsername, validatePassword, validateFirstName, validateLastName, validatePhoneNumber, validateAddress, validateHealthCardNumber);
+                String healthCardValue = healthCardNumber.getText().toString();
+                DatabaseReference patientRef = database.getReference("patients").child(String.valueOf(healthCardValue));
+                patientRef.setValue(newPatient);
             }
         });
+
+    }
+
+
+    private String hashEmail(String email) {
+        return email.replace(".", "_").replace("@", "_");
     }
 
     // Directs to one of the layout pages including the Welcome page, the Rejected page, and the Pending page as dictated by the admin.
