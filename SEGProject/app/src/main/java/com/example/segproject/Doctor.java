@@ -17,6 +17,20 @@ public class Doctor extends User{
         this.specialties = specialties;
     }
 
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
+    }
+
+    public String getSpecialties() {
+        return specialties;
+    }
+    // Setter for healthCardNumber
+    public void setSpecialties(String healthCardNumber) {
+        this.specialties = healthCardNumber;
+    }
 
     //methods
 
