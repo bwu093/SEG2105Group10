@@ -11,11 +11,11 @@ public class Doctor extends User {
 
     protected String specialties;
 
-    protected List<App> pastAppointments;
+    protected List<AppointmentForDoctor> pastAppointments;
 
-    protected List<App> upcomingAppointments;
+    protected List<AppointmentForDoctor> upcomingAppointments;
 
-    protected List<Sft> upcomingShiftsForDoctor;
+    protected List<ShiftsForDoctor> upcomingShiftsForDoctor;
 
     //constructor
     public Doctor(String userId, String username, String password, String firstName, String lastName, String phoneNumber, String address, String employeeNumber, String specialties) {
@@ -50,42 +50,121 @@ public class Doctor extends User {
         this.specialties = specialties;
     }
 
-    public List<App> getPastAppointments() {
+    public List<AppointmentForDoctor> getPastAppointments() {
+
         return pastAppointments;
     }
 
-    public void setPastAppointments(List<App> pastAppointments) {
+    public void setPastAppointments(List<AppointmentForDoctor> pastAppointments) {
         this.pastAppointments = pastAppointments;
     }
 
-    public List<App> getUpcomingAppointments() {
+    public List<AppointmentForDoctor> getUpcomingAppointments() {
+
         return upcomingAppointments;
     }
 
-    public void setUpcomingAppointments(List<App> upcomingAppointments) {
+    public void setUpcomingAppointments(List<AppointmentForDoctor> upcomingAppointments) {
         this.upcomingAppointments = upcomingAppointments;
     }
 
-    public List<Sft> getUpcomingShiftsForDoctor() {
+    public List<ShiftsForDoctor> getUpcomingShiftsForDoctor() {
+
         return upcomingShiftsForDoctor;
     }
 
-    public void setUpcomingShiftsForDoctor(List<Sft> upcomingShiftsForDoctor) {
+    public void setUpcomingShiftsForDoctor(List<ShiftsForDoctor> upcomingShiftsForDoctor) {
         this.upcomingShiftsForDoctor = upcomingShiftsForDoctor;
     }
 
+    public static class AppointmentForDoctor {
+
+        private Patient patient;
+        private String conditionOfAppointment;
+        private String dateOfAppointment;
+
+        public AppointmentForDoctor(Patient patient, String conditionOfAppointment, String dateOfAppointment ) {
+            this.patient = patient;
+            this.conditionOfAppointment = conditionOfAppointment;
+            this.dateOfAppointment = dateOfAppointment;
+        }
+
+        public Patient getPatient() {
+            return patient;
+        }
+
+        public void setPatient(Patient patient) {
+            this.patient = patient;
+        }
+
+        public String getConditionOfAppointment() {
+            return conditionOfAppointment;
+        }
+
+        public void setConditionOfAppointment(String conditionOfAppointment) {
+            this.conditionOfAppointment = conditionOfAppointment;
+        }
+
+        public String getDateOfAppointment() {
+            return dateOfAppointment;
+        }
+
+        public void setDateOfAppointment(String dateOfAppointment) {
+            this.dateOfAppointment = dateOfAppointment;
+        }
+
+    }
+
+    public static class ShiftsForDoctor {
+        private String dateOfShift;
+        private String startTimeOfShift;
+        private String endTimeOfShift;
+
+        public ShiftsForDoctor(String dateOfShift, String startTimeOfShift, String endTimeOfShift){
+            this.dateOfShift = dateOfShift;
+            this.startTimeOfShift = startTimeOfShift;
+            this.endTimeOfShift = endTimeOfShift;
+        }
+
+        public String getDateOfShift() {
+            return dateOfShift;
+        }
+
+        public void setDateOfShift(String dateOfShift) {
+            this.dateOfShift = dateOfShift;
+        }
+
+        public String getStartTimeOfShift() {
+            return startTimeOfShift;
+        }
+
+        public void setStartTimeOfShift(String startTimeOfShift) {
+            this.startTimeOfShift = startTimeOfShift;
+        }
+
+        public String getEndTimeOfShift() {
+            return endTimeOfShift;
+        }
+
+        public void setEndTimeOfShift(String endTimeOfShift) {
+            this.endTimeOfShift = endTimeOfShift;
+        }
+    }
+
+
+
     // Prints the information of patient including first name, last name, username, password, phone number, address, and health card number
-    public void informationOfGivenPatient(Appoint appoint) {
+    public void informationOfGivenPatient(AppointmentForDoctor appoint) {
         if (appoint == null) {
             System.out.println("There is no given informaton on the appointment for the patient");
         }
-        Pat pat = appoint.getPatient();
+        Patient pat = appoint.getPatient();
         if (pat != null) {
             System.out.println("Information about patient:" +
                     "\n" + "First Name:" + pat.getFirstName() +
                     "\n" + "Last Name:" + pat.getLastName() +
                     "\n" + "Username" + pat.getUsername() +
-                    "\n" + "Password:" + pat.getPasword() +
+                    "\n" + "Password:" + pat.getPassword() +
                     "\n" + "Phone Number:" + pat.getPhoneNumber() +
                     "\n" + "Address" + pat.getAddress() +
                     "\n" + "Health Card Number:" + pat.getHealthCardNumber());
