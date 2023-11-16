@@ -44,7 +44,7 @@ public class UpcomingAppointments extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openPatientInformation();
-            }}
+            }
         });
 
         buttonForBack.setOnClickListener(new View.OnClickListener() {
