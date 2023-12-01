@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
+import java.util.Calendar;
 
 import androidx.annotation.RequiresApi;
 
@@ -25,4 +28,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class doctorAppoint extends AppCompatActivity {
+    private Toolbar toolbar;
+
 }

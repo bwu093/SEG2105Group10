@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "181574317290",
+    "firebase_url": "https://seg2105project-22792-default-rtdb.firebaseio.com",
+    "project_id": "seg2105project-22792",
+    "storage_bucket": "seg2105project-22792.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181574317290:android:806d1d5bdbdd0420e99393",
+        "android_client_info": {
+          "package_name": "IN33d.pro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWp3soQS3QkV9jqAKRJG2_VJJHhOjnp6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181574317290:android:1b2c41f7ee5203a2e99393",
+        "android_client_info": {
+          "package_name": "com.example.segproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWp3soQS3QkV9jqAKRJG2_VJJHhOjnp6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
