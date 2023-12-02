@@ -59,6 +59,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.7.2")
     implementation("com.google.android.material:material:1.9.0")
     implementation(("com.google.firebase:firebase-database:20.2.2"))
+    implementation ("com.firebaseui:firebase-ui-database:8.0.0")
+    implementation ("com.google.firebase:firebase-auth:20.2.2")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
@@ -73,6 +75,8 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
 
 
 
