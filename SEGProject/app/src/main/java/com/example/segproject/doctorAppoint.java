@@ -19,7 +19,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.app.AlertDialog;
 
 import java.util.Calendar;
@@ -170,7 +170,7 @@ public class doctorAppoint extends AppCompatActivity {
                     public showDoctorAppointment onCreateViewHolder(ViewGroup parent, int viewType) {
 
                         View view = LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.single_show_appointment,parent,false);
+                                .inflate(R.layout.show_appointment,parent,false);
                         return new showDoctorAppointment(view);
                     }
                 };
@@ -181,7 +181,7 @@ public class doctorAppoint extends AppCompatActivity {
     private void alertDialog(final String patientID, final String slot) {
 
         count = 0;
-        AlertDialog.Builder builder = new AlertDialog.Builder(bookedApointments.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(doctorAppoint.this);
         builder.setIcon(R.drawable.img_3).setTitle("Cancel Appointment");
         builder.setMessage("Are You Sure! Want to Cancel Appointment");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -259,6 +259,104 @@ public class doctorAppoint extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+    }
+
+    private void changeSlotToTime(String slot) {
+
+        switch (slot) {
+            case "1":
+                time = "08:00 AM";
+                break;
+            case "2":
+                time = "08:30 AM";
+                break;
+            case "3":
+                time = "09:00 AM";
+                break;
+            case "4":
+                time = "09:30 AM";
+                break;
+            case "5":
+                time = "10:00 AM";
+                break;
+            case "6":
+                time = "10:30 AM";
+                break;
+            case "7":
+                time = "11:00 AM";
+                break;
+            case "8":
+                time = "11:30 AM";
+                break;
+            case "9":
+                time = "12:00 AM";
+                break;
+            case "10":
+                time = "12:30 AM";
+                break;
+            case "11":
+                time = "01:00 AM";
+                break;
+            case "12":
+                time = "01:30 AM";
+                break;
+            case "13":
+                time = "02:00 PM";
+                break;
+            case "14":
+                time = "02:30 PM";
+                break;
+            case "15":
+                time = "03:00 PM";
+                break;
+            case "16":
+                time = "03:30 PM";
+                break;
+            case "17":
+                time = "04:00 PM";
+                break;
+            case "18":
+                time = "04:30 PM";
+                break;
+            case "19":
+                time = "05:00 PM";
+                break;
+            case "20":
+                time = "05:30 PM";
+                break;
+            case "21":
+                time = "06:00 PM";
+                break;
+            case "22":
+                time = "06:30 PM";
+                break;
+            case "23":
+                time = "07:00 PM";
+                break;
+            case "24":
+                time = "07:30 PM";
+                break;
+            case "25":
+                time = "08:00 PM";
+                break;
+            case "26":
+                time = "08:30 PM";
+                break;
+            case "27":
+                time = "09:00 PM";
+                break;
+            case "28":
+                time = "09:30 PM";
+                break;
+            case "29":
+                time = "10:00 PM";
+                break;
+            case "30":
+                time = "10:30 PM";
+                break;
+            default:
+                break;
+        }
     }
     public class showDoctorAppointment extends RecyclerView.ViewHolder{
 
