@@ -33,13 +33,19 @@ public class RegistrationPageForDoctor extends AppCompatActivity {
     DatabaseReference reference;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page_for_doctor);
 
+        returnDoctor = findViewById(R.id.returnDoctor);
 
+        returnDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerDoctor();
+            }
+        });
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("users");
