@@ -38,6 +38,9 @@ public class RegistrationPageForPatient extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("users");
 
+        layoutError = findViewById(R.id.error_display);
+        viewSuccessInfo = findViewById(R.id.successInfo);
+
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         username = findViewById(R.id.username);
