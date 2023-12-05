@@ -9,11 +9,13 @@ public class Administrator extends User{
         super(userId, username, password, firstName, lastName, phoneNumber, address, "Administrator");
     }
 
-
     //methods
     //returns true if approving user and returns false if rejecting user
     public boolean approveOrReject(User user){
         return true;
         //insert logic
     }
+
+    //view registration requests
+
 }
