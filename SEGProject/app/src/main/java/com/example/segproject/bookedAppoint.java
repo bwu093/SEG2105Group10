@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import java.util.Calendar;
 import androidx.annotation.RequiresApi;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -211,91 +213,91 @@ public class bookedAppoint extends AppCompatActivity implements View.OnClickList
                 time = "08:00 AM";
                 break;
             case 2:
-                time = "08:20 AM";
+                time = "08:30 AM";
                 break;
             case 3:
-                time = "08:40 AM";
-                break;
-            case 4:
                 time = "09:00 AM";
                 break;
+            case 4:
+                time = "09:30 AM";
+                break;
             case 5:
-                time = "09:20 AM";
-                break;
-            case 6:
-                time = "09:40 AM";
-                break;
-            case 7:
                 time = "10:00 AM";
                 break;
-            case 8:
-                time = "10:20 AM";
+            case 6:
+                time = "10:30 AM";
                 break;
-            case 9:
-                time = "10:40 AM";
-                break;
-            case 10:
+            case 7:
                 time = "11:00 AM";
                 break;
+            case 8:
+                time = "11:30 AM";
+                break;
+            case 9:
+                time = "12:00 PM";
+                break;
+            case 10:
+                time = "12:30 AM";
+                break;
             case 11:
-                time = "11:20 AM";
+                time = "01:00 AM";
                 break;
             case 12:
-                time = "11:40 AM";
+                time = "01:30 AM";
                 break;
             case 13:
                 time = "02:00 PM";
                 break;
             case 14:
-                time = "02:20 PM";
+                time = "02:30 PM";
                 break;
             case 15:
-                time = "02:40 PM";
-                break;
-            case 16:
                 time = "03:00 PM";
                 break;
+            case 16:
+                time = "03:30 PM";
+                break;
             case 17:
-                time = "03:20 PM";
-                break;
-            case 18:
-                time = "03:40 PM";
-                break;
-            case 19:
                 time = "04:00 PM";
                 break;
-            case 20:
-                time = "04:20 PM";
+            case 18:
+                time = "04:30 PM";
                 break;
-            case 21:
-                time = "04:40 PM";
-                break;
-            case 22:
+            case 19:
                 time = "05:00 PM";
                 break;
-            case 23:
-                time = "05:20 PM";
+            case 20:
+                time = "05:30 PM";
                 break;
-            case 24:
-                time = "05:40 PM";
-                break;
-            case 25:
+            case 21:
                 time = "06:00 PM";
                 break;
+            case 22:
+                time = "06:30 PM";
+                break;
+            case 23:
+                time = "07:00 PM";
+                break;
+            case 24:
+                time = "07:30 PM";
+                break;
+            case 25:
+                time = "08:00 PM";
+                break;
             case 26:
-                time = "06:20 PM";
+                time = "08:30 PM";
                 break;
             case 27:
-                time = "06:40 PM";
-                break;
-            case 28:
                 time = "09:00 PM";
                 break;
+            case 28:
+                time = "09:30 PM";
+                break;
             case 29:
-                time = "09:20 PM";
+                time = "10:00 PM";
                 break;
             case 30:
-                time = "09:40 PM";
+                time = "10:30 PM";
                 break;
             default:
                 break;
@@ -304,103 +306,196 @@ public class bookedAppoint extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        switch(view.getId())
-        {
-            case R.id.time1:
-                isBooked(1);
-                break;
-            case R.id.time2:
-                isBooked(2);
-                break;
-            case R.id.time3:
-                isBooked(3);
-                break;
-            case R.id.time4:
-                isBooked(4);
-                break;
-            case R.id.time5:
-                isBooked(5);
-                break;
-            case R.id.time6:
-                isBooked(6);
-                break;
-            case R.id.time7:
-                isBooked(7);
-                break;
-            case R.id.time8:
-                isBooked(8);
-                break;
-            case R.id.time9:
-                isBooked(9);
-                break;
-            case R.id.time10:
-                isBooked(10);
-                break;
-            case R.id.time11:
-                isBooked(11);
-                break;
-            case R.id.time12:
-                isBooked(12);
-                break;
-            case R.id.time13:
-                isBooked(13);
-                break;
-            case R.id.time14:
-                isBooked(14);
-                break;
-            case R.id.time15:
-                isBooked(15);
-                break;
-            case R.id.time16:
-                isBooked(16);
-                break;
-            case R.id.time17:
-                isBooked(17);
-                break;
-            case R.id.time18:
-                isBooked(18);
-                break;
-            case R.id.time19:
-                isBooked(19);
-                break;
-            case R.id.time20:
-                isBooked(20);
-                break;
-            case R.id.time21:
-                isBooked(21);
-                break;
-            case R.id.time22:
-                isBooked(22);
-                break;
-            case R.id.time23:
-                isBooked(23);
-                break;
-            case R.id.time24:
-                isBooked(24);
-                break;
-            case R.id.time25:
-                isBooked(25);
-                break;
-            case R.id.time26:
-                isBooked(26);
-                break;
-            case R.id.time27:
-                isBooked(27);
-                break;
-            case R.id.time28:
-                isBooked(28);
-                break;
-            case R.id.time29:
-                isBooked(29);
-                break;
-            case R.id.time30:
-                isBooked(30);
-                break;
+        int viewId = view.getId();
+        if(viewId==R.id.time1){
+            isBooked(1);
+        } else if(viewId==R.id.time2){
+            isBooked(2);
+        } else if(viewId==R.id.time3){
+            isBooked(3);
+        } else if(viewId==R.id.time4){
+            isBooked(4);
+        } else if(viewId==R.id.time5){
+            isBooked(5);
+        } else if(viewId==R.id.time6){
+            isBooked(6);
+        } else if(viewId==R.id.time7){
+            isBooked(7);
+        } else if(viewId==R.id.time8){
+            isBooked(8);
+        } else if(viewId==R.id.time9){
+            isBooked(9);
+        } else if(viewId==R.id.time10){
+            isBooked(10);
+        } else if(viewId==R.id.time11){
+            isBooked(11);
+        } else if(viewId==R.id.time12){
+            isBooked(12);
+        } else if(viewId==R.id.time13){
+            isBooked(13);
+        } else if(viewId==R.id.time14){
+            isBooked(14);
+        } else if(viewId==R.id.time15){
+            isBooked(15);
+        } else if(viewId==R.id.time16){
+            isBooked(16);
+        } else if(viewId==R.id.time17){
+            isBooked(17);
+        } else if(viewId==R.id.time18){
+            isBooked(18);
+        } else if(viewId==R.id.time19){
+            isBooked(19);
+        } else if(viewId==R.id.time20){
+            isBooked(20);
+        } else if(viewId==R.id.time21){
+            isBooked(21);
+        } else if(viewId==R.id.time22){
+            isBooked(22);
+        } else if(viewId==R.id.time23){
+            isBooked(23);
+        } else if(viewId==R.id.time24){
+            isBooked(24);
+        } else if(viewId==R.id.time25){
+            isBooked(25);
+        } else if(viewId==R.id.time26){
+            isBooked(26);
+        } else if(viewId==R.id.time27){
+            isBooked(27);
+        } else if(viewId==R.id.time28){
+            isBooked(28);
+        } else if(viewId==R.id.time29){
+            isBooked(29);
+        } else if(viewId==R.id.time30){
+            isBooked(30);
+        }
 
+    }
+
+    private void setDefaultColor(int i) {
+
+        switch (i) {
+            case 1: c1.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c1.setEnabled(true);
+                break;
+            case 2:
+                c2.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c2.setEnabled(true);
+                break;
+            case 3:
+                c3.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c3.setEnabled(true);
+                break;
+            case 4:
+                c4.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c4.setEnabled(true);
+                break;
+            case 5:
+                c5.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c5.setEnabled(true);
+                break;
+            case 6:
+                c6.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c6.setEnabled(true);
+                break;
+            case 7:
+                c7.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c7.setEnabled(true);
+                break;
+            case 8:
+                c8.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c8.setEnabled(true);
+                break;
+            case 9:
+                c9.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c9.setEnabled(true);
+                break;
+            case 10:
+                c10.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c10.setEnabled(true);
+                break;
+            case 11:
+                c11.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c11.setEnabled(true);
+                break;
+            case 12:
+                c12.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c12.setEnabled(true);
+                break;
+            case 13:
+                c13.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c13.setEnabled(true);
+                break;
+            case 14:
+                c14.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c14.setEnabled(true);
+                break;
+            case 15:
+                c15.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c15.setEnabled(true);
+                break;
+            case 16:
+                c16.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c16.setEnabled(true);
+                break;
+            case 17:
+                c17.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c17.setEnabled(true);
+                break;
+            case 18:
+                c18.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c18.setEnabled(true);
+                break;
+            case 19:
+                c19.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c19.setEnabled(true);
+                break;
+            case 20:
+                c20.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c20.setEnabled(true);
+                break;
+            case 21:
+                c21.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c21.setEnabled(true);
+                break;
+            case 22:
+                c22.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c22.setEnabled(true);
+                break;
+            case 23:
+                c23.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c23.setEnabled(true);
+                break;
+            case 24:
+                c24.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c24.setEnabled(true);
+                break;
+            case 25:
+                c25.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c25.setEnabled(true);
+                break;
+            case 26:
+                c26.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c26.setEnabled(true);
+                break;
+            case 27:
+                c27.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c27.setEnabled(true);
+                break;
+            case 28:
+                c28.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c28.setEnabled(true);
+                break;
+            case 29:
+                c29.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c29.setEnabled(true);
+                break;
+            case 30:
+                c30.setCardBackgroundColor(getResources().getColor(R.color.gray));
+                c30.setEnabled(true);
+                break;
             default:
                 break;
         }
-
     }
     private void isBooked(int i) {
 
@@ -416,5 +511,289 @@ public class bookedAppoint extends AppCompatActivity implements View.OnClickList
         }
 
 
+    }
+
+    private void setRed(int i) {
+
+        switch (i) {
+            case 1: c1.setCardBackgroundColor(Color.RED);
+                c1.setEnabled(false);
+                break;
+            case 2:
+                c2.setCardBackgroundColor(Color.RED);
+                c2.setEnabled(false);
+                break;
+            case 3:
+                c3.setCardBackgroundColor(Color.RED);
+                c3.setEnabled(false);
+                break;
+            case 4:
+                c4.setCardBackgroundColor(Color.RED);
+                c4.setEnabled(false);
+                break;
+            case 5:
+                c5.setCardBackgroundColor(Color.RED);
+                c5.setEnabled(false);
+                break;
+            case 6:
+                c6.setCardBackgroundColor(Color.RED);
+                c6.setEnabled(false);
+                break;
+            case 7:
+                c7.setCardBackgroundColor(Color.RED);
+                c7.setEnabled(false);
+                break;
+            case 8:
+                c8.setCardBackgroundColor(Color.RED);
+                c8.setEnabled(false);
+                break;
+            case 9:
+                c9.setCardBackgroundColor(Color.RED);
+                c9.setEnabled(false);
+                break;
+            case 10:
+                c10.setCardBackgroundColor(Color.RED);
+                c10.setEnabled(false);
+                break;
+            case 11:
+                c11.setCardBackgroundColor(Color.RED);
+                c11.setEnabled(false);
+                break;
+            case 12:
+                c12.setCardBackgroundColor(Color.RED);
+                c12.setEnabled(false);
+                break;
+            case 13:
+                c13.setCardBackgroundColor(Color.RED);
+                c13.setEnabled(false);
+                break;
+            case 14:
+                c14.setCardBackgroundColor(Color.RED);
+                c14.setEnabled(false);
+                break;
+            case 15:
+                c15.setCardBackgroundColor(Color.RED);
+                c15.setEnabled(false);
+                break;
+            case 16:
+                c16.setCardBackgroundColor(Color.RED);
+                c16.setEnabled(false);
+                break;
+            case 17:
+                c17.setCardBackgroundColor(Color.RED);
+                c17.setEnabled(false);
+                break;
+            case 18:
+                c18.setCardBackgroundColor(Color.RED);
+                c18.setEnabled(false);
+                break;
+            case 19:
+                c19.setCardBackgroundColor(Color.RED);
+                c19.setEnabled(false);
+                break;
+            case 20:
+                c20.setCardBackgroundColor(Color.RED);
+                c20.setEnabled(false);
+                break;
+            case 21:
+                c21.setCardBackgroundColor(Color.RED);
+                c21.setEnabled(false);
+                break;
+            case 22:
+                c22.setCardBackgroundColor(Color.RED);
+                c22.setEnabled(false);
+                break;
+            case 23:
+                c23.setCardBackgroundColor(Color.RED);
+                c23.setEnabled(false);
+                break;
+            case 24:
+                c24.setCardBackgroundColor(Color.RED);
+                c24.setEnabled(false);
+                break;
+            case 25:
+                c25.setCardBackgroundColor(Color.RED);
+                c25.setEnabled(false);
+                break;
+            case 26:
+                c26.setCardBackgroundColor(Color.RED);
+                c26.setEnabled(false);
+                break;
+            case 27:
+                c27.setCardBackgroundColor(Color.RED);
+                c27.setEnabled(false);
+                break;
+            case 28:
+                c28.setCardBackgroundColor(Color.RED);
+                c28.setEnabled(false);
+                break;
+            case 29:
+                c29.setCardBackgroundColor(Color.RED);
+                c29.setEnabled(false);
+                break;
+            case 30:
+                c30.setCardBackgroundColor(Color.RED);
+                c30.setEnabled(false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setGreen(int i) {
+
+        switch (i) {
+            case 1: c1.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 2:
+                c2.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 3:
+                c3.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 4:
+                c4.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 5:
+                c5.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 6:
+                c6.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 7:
+                c7.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 8:
+                c8.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 9:
+                c9.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 10:
+                c10.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 11:
+                c11.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 12:
+                c12.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 13:
+                c13.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 14:
+                c14.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 15:
+                c15.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 16:
+                c16.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 17:
+                c17.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 18:
+                c18.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 19:
+                c19.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 20:
+                c20.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 21:
+                c21.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 22:
+                c22.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 23:
+                c23.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 24:
+                c24.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 25:
+                c25.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 26:
+                c26.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 27:
+                c27.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 28:
+                c28.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 29:
+                c29.setCardBackgroundColor(Color.GREEN);
+                break;
+            case 30:
+                c30.setCardBackgroundColor(Color.GREEN);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(this, "You are not Logged in", Toast.LENGTH_SHORT).show();
+
+            Intent login_Intent = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                login_Intent = new Intent(bookedAppoint.this, LoginPage.class);
+            }
+            startActivity(login_Intent);
+        } else {
+            flagChecked = 0;
+            databaseReference.child(getIntent().getStringExtra("DoctorUserId").toString()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    if (dataSnapshot.hasChild(date)) {
+
+                        databaseReference.child(getIntent().getStringExtra("DoctorUserId").toString()).child(date).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                for (int i = 1; i <= 30; i++) {
+
+                                    if (dataSnapshot.hasChild(String.valueOf(i))) {
+                                        setRed(i);
+
+                                    } else {
+                                        setDefaultColor(i);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    } else {
+                        for (int i = 1; i <= 30; i++) {
+                            setDefaultColor(i);
+                        }
+                        // Toast.makeText(Patient_BookAppointmentActivity.this, "all time is available on this date", Toast.LENGTH_SHORT).show();
+                        // mDataBaseRef.child(doctorUserId).child(date).child(slot).child("PatientID").setValue(userId);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 }
